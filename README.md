@@ -26,11 +26,11 @@ to make intercompatibility possible.
 
 ```json
 {
-  "type": "root",
+  "type": "Root",
   "children": [
     {
-      "type": "folder",
-      "meta": {
+      "type": "Folder",
+      "properties": {
         "name": "Test"
       },
       "children": [
@@ -45,14 +45,14 @@ to make intercompatibility possible.
 This format is based on a tree of folders that can contain
 ordered features and folders.
 
-- The root of the tree has a member `"type"` with the value `"root"`.
+- The root of the tree has a member `"type"` with the value `"Root"`.
   This can be used to differentiate geojson-folders data from other
   GeoJSON data.
 - The root contains a `"children"` member that has an array with
   ordered features and folders as children.
 - Each item in the `"children"` array can either be a feature, marked
-  by `"type": "Feature"`, or a folder, marked by `"type": "folder"`
-- Folders contain a member `"meta"`, which is an object of arbitrary
+  by `"type": "Feature"`, or a folder, marked by `"type": "Folder"`
+- Folders contain a member `"properties"`, which is an object of arbitrary
   JSON data.
 
 ## Compatibility with GeoJSON
@@ -68,7 +68,7 @@ each feature. However, this has drawbacks:
 - Folders would require unique identifiers.
 - The order of features in folders would be more complex.
 - Nesting folders would be more complex.
-- There's no obvious place for the `"meta"` information to go.
+- There's no obvious place for the folder `"properties"` information to go.
 
 ## Comparison to existing collection types
 
@@ -86,13 +86,6 @@ structure:
   is not a folder.
 - Folders can be arbitrarily nested.
 - Folders can have their own metadata.
-
-## Relationship to other standards
-
-It would be preferable to invent as little as possible in this format.
-One consideration is changing the `meta` field of the folder object
-to `data` in order to correspond closer to the [unist](https://github.com/syntax-tree/unist)
-specification and ecosystem of tools.
 
 ## Reference implementations
 
