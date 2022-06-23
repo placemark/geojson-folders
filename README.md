@@ -26,7 +26,8 @@ to make intercompatibility possible.
 
 ```json
 {
-  "type": "Root",
+  "type": "Folder",
+  "properties": null,
   "children": [
     {
       "type": "Folder",
@@ -45,7 +46,7 @@ to make intercompatibility possible.
 This format is based on a tree of folders that can contain
 ordered features and folders.
 
-- The root of the tree has a member `"type"` with the value `"Root"`.
+- The root of the tree has a member `"type"` with the value `"Folder"`.
   This can be used to differentiate geojson-folders data from other
   GeoJSON data.
 - The root contains a `"children"` member that has an array with
@@ -53,7 +54,7 @@ ordered features and folders.
 - Each item in the `"children"` array can either be a feature, marked
   by `"type": "Feature"`, or a folder, marked by `"type": "Folder"`
 - Folders contain a member `"properties"`, which is an object of arbitrary
-  JSON data.
+  JSON data. `"properties"` can be null.
 
 ## Compatibility with GeoJSON
 
@@ -82,10 +83,13 @@ the same properties between all of the geometries in the GeometryCollection.
 This specification aims to achieve all the capabilities of KML's folder
 structure:
 
-- Features can be at the "root level", thus not in any folder. The root
-  is not a folder.
 - Folders can be arbitrarily nested.
 - Folders can have their own metadata.
+
+## The root folder
+
+When translating to and from KML, the root folder is the root of the KML file,
+so its `"properties"` data will be ignored.
 
 ## Reference implementations
 
